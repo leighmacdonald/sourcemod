@@ -1,4 +1,4 @@
-SourceMod
+SourceMod (Build with postgres 14 to support SCRAM auth, 32bit linux only)
 =========
 
 General
