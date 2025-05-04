@@ -1,6 +1,8 @@
 SourceMod (Build with postgres 14 to support SCRAM auth, 32bit linux only)
 =========
 
+The release artifacts are built using this docker build script: https://github.com/leighmacdonald/souremod-build-docker-postgres. Feel free to build them yourselves.
+
 General
 -------
 - [SourceMod website](http://www.sourcemod.net): Source Engine scripting and server administration
