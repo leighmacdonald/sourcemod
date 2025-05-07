@@ -130,6 +130,7 @@ typedef enum
 	PQPING_NO_ATTEMPT			/* connection not attempted (bad params) */
 } PGPing;
 
+
 /* PGconn encapsulates a connection to the backend.
  * The contents of this struct are not supposed to be known to applications.
  */
@@ -593,6 +594,41 @@ extern int	PQenv2encoding(void);
 /* === in fe-auth.c === */
 
 extern char *PQencryptPassword(const char *passwd, const char *user);
+
+typedef enum {
+    PG_MD5 = 0,
+    PG_SHA1,
+    PG_SHA224,
+    PG_SHA256,
+    PG_SHA384,
+    PG_SHA512
+} pg_cryptohash_type;
+
+typedef enum pg_cryptohash_errno
+{
+    PG_CRYPTOHASH_ERROR_NONE = 0,
+    PG_CRYPTOHASH_ERROR_DEST_LEN,
+} pg_cryptohash_errno;
+
+/* Internal pg_cryptohash_ctx structure */
+struct pg_cryptohash_ctx
+{
+    pg_cryptohash_type type;
+    pg_cryptohash_errno error;
+
+    union
+    {
+        pg_md5_ctx  md5;
+        pg_sha1_ctx sha1;
+        pg_sha224_ctx sha224;
+        pg_sha256_ctx sha256;
+        pg_sha384_ctx sha384;
+        pg_sha512_ctx sha512;
+    } data;
+};
+
+
+typedef struct pg_cryptohash_ctx pg_cryptohash_ctx;
 
 extern pg_hmac_ctx *pg_hmac_create(pg_cryptohash_type type);
 
