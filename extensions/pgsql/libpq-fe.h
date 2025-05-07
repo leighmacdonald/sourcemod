@@ -594,7 +594,7 @@ extern int	PQenv2encoding(void);
 
 extern char *PQencryptPassword(const char *passwd, const char *user);
 
-extern pg_hmac_ctx *pg_hmac_create(pg_cryptohash_type type)
+extern pg_hmac_ctx *pg_hmac_create(pg_cryptohash_type type);
 
 /* === in encnames.c === */
 
